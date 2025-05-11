@@ -16,8 +16,8 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
-    config-url: /user-service/v3/api-docs/swagger-config
-    url: /user-service/v3/api-docs
+    config-url: /trek-service/v3/api-docs/swagger-config
+    url: /trek-service/v3/api-docs
 
 
 
