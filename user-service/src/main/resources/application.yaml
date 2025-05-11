@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:5445/greentrail-db-user
+    #url: jdbc:postgresql://localhost:5445/user-api
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  application:
+    name: user-service
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    config-url: /user-service/v3/api-docs/swagger-config
+    url: /user-service/v3/api-docs
+
+
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+#      defaultZone: http://eureka-server:8761/eureka/
+    registry-fetch-interval-seconds: 5
+    initial-instance-info-replication-interval-seconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    enable-self-preservation: false
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+
+
