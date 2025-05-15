@@ -2,14 +2,15 @@ package com.example.userservice.entity.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "users")
+@Accessors(chain = true)
 public class Users{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,9 @@ public class Users{
     @Column(name = "name", nullable = false, length = 30)
     private String name;
 
-    @Column(name = "password", nullable = false, length = 1000)
-    private String password;
 
     @Column(name = "date_of_creation")
-    private LocalDateTime dateOfCreation;
+    private LocalDateTime dateOfCreation = LocalDateTime.now();
 
     @Column(name = "profile_picture", length = 225)
     private String profilePicture;
