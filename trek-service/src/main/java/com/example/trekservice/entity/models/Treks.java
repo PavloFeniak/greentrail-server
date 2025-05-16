@@ -2,6 +2,7 @@ package com.example.trekservice.entity.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -10,12 +11,13 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "trek")
+@Accessors(chain = true)
 public class Treks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -55,7 +57,7 @@ public class Treks {
     private int createdBy;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "trek", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrekParticipants> trekParticipants;
