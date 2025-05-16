@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="greentrail-db-auth@localhost" uuid="66571859-fd53-421e-bb2d-355103ff753c">
+    <data-source source="LOCAL" name="greentrail-db-user@localhost" uuid="5c4ac910-d541-4828-a777-4b87615e5760">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5445/greentrail-db-user</jdbc-url>
       <jdbc-url>jdbc:postgresql://localhost:5443/greentrail-db-auth</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
