@@ -1,0 +1,37 @@
+package com.example.userservice.controller;
+
+import com.example.userservice.entity.DTO.UserResponseDTO;
+import com.example.userservice.entity.DTO.UserUpdateDTO;
+import com.example.userservice.services.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/users")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserService userService;
+
+    @GetMapping("/{id}")
+    public UserResponseDTO getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+
+    @GetMapping("/email")
+    public UserResponseDTO getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email);
+    }
+
+    @PutMapping("/{id}")
+    public UserResponseDTO updateUser(@PathVariable Long id, @RequestBody UserUpdateDTO userUpdateDTO) {
+        return userService.updateUser(id, userUpdateDTO);
+    }
+
+    @PostMapping
+    public UserResponseDTO addUser(@RequestBody UserResponseDTO userResponseDTO) {
+        return userService.addUser(userResponseDTO);
+    }
+
+
+}
