@@ -12,6 +12,11 @@
                   <project path="$PROJECT_DIR$/api-gateway" />
                 </projects>
               </build>
+              <build path="$PROJECT_DIR$/chat-service" name="chat-service">
+                <projects>
+                  <project path="$PROJECT_DIR$/chat-service" />
+                </projects>
+              </build>
               <build path="$PROJECT_DIR$/eureka-client" name="eureka-client">
                 <projects>
                   <project path="$PROJECT_DIR$/eureka-client" />
@@ -41,6 +46,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/api-gateway" />
+            <option value="$PROJECT_DIR$/chat-service" />
             <option value="$PROJECT_DIR$/eureka-client" />
             <option value="$PROJECT_DIR$/eureka-server" />
             <option value="$PROJECT_DIR$/trek-service" />
@@ -57,13 +63,21 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/chat-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/chat-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/auth-service" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/auth-service" />
-          </set>
         </option>
-      </GradleProjectSettings>
+      </GradleProjectSettings>       
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-client" />
         <option name="modules">
