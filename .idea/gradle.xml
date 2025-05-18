@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -27,6 +26,11 @@
                   <project path="$PROJECT_DIR$/eureka-server" />
                 </projects>
               </build>
+              <build path="$PROJECT_DIR$/media-service" name="media-service">
+                <projects>
+                  <project path="$PROJECT_DIR$/media-service" />
+                </projects>
+              </build>
               <build path="$PROJECT_DIR$/trek-service" name="trek-service">
                 <projects>
                   <project path="$PROJECT_DIR$/trek-service" />
@@ -41,7 +45,6 @@
           </compositeBuild>
         </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -49,63 +52,8 @@
             <option value="$PROJECT_DIR$/chat-service" />
             <option value="$PROJECT_DIR$/eureka-client" />
             <option value="$PROJECT_DIR$/eureka-server" />
+            <option value="$PROJECT_DIR$/media-service" />
             <option value="$PROJECT_DIR$/trek-service" />
-            <option value="$PROJECT_DIR$/user-service" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/api-gateway" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/api-gateway" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/chat-service" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/chat-service" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/auth-service" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/auth-service" />
-        </option>
-      </GradleProjectSettings>       
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-client" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/eureka-client" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-server" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/eureka-server" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/trek-service" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/trek-service" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/user-service" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/user-service" />
           </set>
         </option>

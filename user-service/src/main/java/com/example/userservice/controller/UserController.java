@@ -1,5 +1,6 @@
 package com.example.userservice.controller;
 
+import com.example.userservice.entity.DTO.UserRequestDTO;
 import com.example.userservice.entity.DTO.UserResponseDTO;
 import com.example.userservice.entity.DTO.UserUpdateDTO;
 import com.example.userservice.services.UserService;
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping
-    public UserResponseDTO addUser(@RequestBody UserResponseDTO userResponseDTO) {
+    public UserResponseDTO addUser(@RequestBody UserRequestDTO userResponseDTO) {
         return userService.addUser(userResponseDTO);
     }
 

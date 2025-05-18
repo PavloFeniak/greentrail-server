@@ -30,6 +30,7 @@ public class ChatUserServiceImpl implements ChatUserService {
                 .setJoinedAt(LocalDateTime.now())
                 .setUserId(request.getUserId());
         chatUser = chatUserRepository.save(chatUser);
+
         return mapToDTO(chatUser);
     }
 

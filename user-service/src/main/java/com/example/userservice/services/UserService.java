@@ -1,5 +1,6 @@
 package com.example.userservice.services;
 
+import com.example.userservice.entity.DTO.UserRequestDTO;
 import com.example.userservice.entity.DTO.UserResponseDTO;
 import com.example.userservice.entity.DTO.UserUpdateDTO;
 import com.example.userservice.entity.model.Users;
@@ -34,14 +35,14 @@ public class UserService {
         userRepository.save(user);
         return mapToDTO(user);
     }
-    public UserResponseDTO addUser(UserResponseDTO userResponseDTO) {
+    public UserResponseDTO addUser(UserRequestDTO userResponseDTO) {
         if(userRepository.findByEmail(userResponseDTO.getEmail()).isPresent()){
             throw new RuntimeException("User already exists");
         }
-        Users user = new Users().setEmail(userResponseDTO.getEmail())
+        Users user = new Users()
+                .setEmail(userResponseDTO.getEmail())
                 .setPhoneNumber(userResponseDTO.getPhoneNumber())
                 .setName(userResponseDTO.getName())
-                .setProfilePicture(userResponseDTO.getProfilePicture())
                 .setAddress(userResponseDTO.getAddress());
         userRepository.save(user);
         return mapToDTO(user);

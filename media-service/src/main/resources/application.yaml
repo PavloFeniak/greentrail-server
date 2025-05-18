@@ -22,7 +22,7 @@ springdoc:
 
 
 server:
-  port: 0
+  port: 8086
 
 eureka:
   client:
