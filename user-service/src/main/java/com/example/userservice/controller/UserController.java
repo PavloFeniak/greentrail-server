@@ -5,6 +5,7 @@ import com.example.userservice.entity.DTO.UserResponseDTO;
 import com.example.userservice.entity.DTO.UserUpdateDTO;
 import com.example.userservice.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +16,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public UserResponseDTO getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @GetMapping("/email")

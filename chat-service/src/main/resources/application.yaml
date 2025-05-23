@@ -19,7 +19,11 @@ springdoc:
     config-url: /chat-service/v3/api-docs/swagger-config
     url: /chat-service/v3/api-docs
 
-
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
 
 server:
   port: 8087

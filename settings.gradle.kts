@@ -1,11 +1,11 @@
 rootProject.name = "greentrail-server"
 
-includeBuild("eureka-server")
-includeBuild("eureka-client")
-includeBuild("api-gateway")
-includeBuild("chat-service")
-includeBuild("media-service")
-
-includeBuild("trek-service")
-includeBuild("user-service")
+include("eureka-server")
+include("eureka-client")
+include("api-gateway")
+include("chat-service")
+include("media-service")
+include("auth-service")
+include("trek-service")
+include("user-service")
 

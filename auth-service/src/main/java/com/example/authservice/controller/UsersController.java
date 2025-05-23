@@ -2,9 +2,11 @@ package com.example.authservice.controller;
 
 import com.example.authservice.entity.DTO.AuthRequest;
 import com.example.authservice.entity.DTO.AuthResponse;
+import com.example.authservice.entity.DTO.UserRegisteredEvent;
 import com.example.authservice.entity.model.Users;
 import com.example.authservice.jwt.JwtUtil;
 import com.example.authservice.repository.UsersRepository;
+import com.example.authservice.service.UserEventPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,9 @@ public class UsersController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UserEventPublisher eventPublisher;
+
+    @Autowired
     private UsersRepository userRepository;
 
     @Autowired
@@ -49,7 +54,17 @@ public class UsersController {
 
         Users user = new Users().setEmail(authUser.getEmail()).setPasswordHash(passwordEncoder.encode(authUser.getPassword()));
         userRepository.save(user);
+        eventPublisher.sendUserRegisteredEvent(
+                new UserRegisteredEvent(
+                        authUser.getEmail(),
+                        authUser.getName(),
+                        authUser.getPhoneNumber(),
+                        authUser.getAddress()
+                )
+        );
+
         return ResponseEntity.ok("User registered");
+
     }
 
     @PostMapping("/login")
