@@ -20,7 +20,7 @@ public class ChatMessage {
     private Chat chat;
 
     @Column(name = "sender_id", nullable = false)
-    private Integer senderId;
+    private String senderId;
 
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;

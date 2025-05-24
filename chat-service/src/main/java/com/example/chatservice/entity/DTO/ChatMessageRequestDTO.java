@@ -7,6 +7,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ChatMessageRequestDTO {
     private Long chatId;
-    private Integer senderId;
+    private String senderId;
     private String content;
 }

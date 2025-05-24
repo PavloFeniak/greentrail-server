@@ -12,7 +12,7 @@ public class MediaFileResponseDTO {
     private String url;
     private String fileName;
     private String mimeType;
-    private Integer uploadedBy;
+    private String uploadedBy;
     private LocalDateTime uploadedAt;
     private String relatedType;
     private Integer relatedId;

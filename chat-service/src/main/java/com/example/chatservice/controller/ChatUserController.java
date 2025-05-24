@@ -38,7 +38,7 @@ public class ChatUserController {
     }
 
     @DeleteMapping("/chat/{chatId}/user/{userId}")
-    public ResponseEntity<?> markUserLeft(@PathVariable Long userId, @PathVariable Long chatId) {
+    public ResponseEntity<?> markUserLeft(@PathVariable String userId, @PathVariable Long chatId) {
         try {
             chatUserService.markUserLeft(userId, chatId);
             return ResponseEntity.ok(Map.of("message", "User removed from chat"));

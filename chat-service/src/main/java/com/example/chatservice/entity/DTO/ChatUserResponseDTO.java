@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class ChatUserResponseDTO {
     private Long id;
-    private Long userId;
+    private String userId;
     private LocalDateTime joinedAt;
     private LocalDateTime leftAt;
 }

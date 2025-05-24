@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 public class ChatMessageResponseDTO {
     private Long id;
-    private Integer senderId;
+    private String senderId;
     private String content;
     private LocalDateTime sentAt;
 }

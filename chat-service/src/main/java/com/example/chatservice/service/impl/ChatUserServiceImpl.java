@@ -43,7 +43,7 @@ public class ChatUserServiceImpl implements ChatUserService {
     }
 
     @Override
-    public void markUserLeft(Long userId, Long chatId) {
+    public void markUserLeft(String userId, Long chatId) {
         ChatUser chatUser = chatUserRepository.findByUserIdAndChatId(userId, chatId)
                 .orElseThrow(() -> new RuntimeException("Chat not found"));
         chatUserRepository.delete(chatUser);

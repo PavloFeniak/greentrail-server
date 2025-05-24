@@ -3,6 +3,7 @@ package com.example.chatservice.service.impl;
 import com.example.chatservice.entity.DTO.ChatMessageResponseDTO;
 import com.example.chatservice.entity.DTO.ChatRequestDTO;
 import com.example.chatservice.entity.DTO.ChatResponseDTO;
+import com.example.chatservice.entity.DTO.ChatUserRequestDTO;
 import com.example.chatservice.entity.model.Chat;
 import com.example.chatservice.repository.ChatMessageRepository;
 import com.example.chatservice.repository.ChatUserRepository;
@@ -27,7 +28,10 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatResponseDTO createChat(ChatRequestDTO requestDTO) {
         Chat chat = new Chat().setTripId(requestDTO.getTripId());
-         chat = chatsRepository.save(chat);
+        chat = chatsRepository.save(chat);
+        chatUserService.addUserToChat(new ChatUserRequestDTO()
+                .setChatId(chat.getId())
+                .setUserId(requestDTO.getCreatedBy()));
         return mapToDTO(chat);
     }
 

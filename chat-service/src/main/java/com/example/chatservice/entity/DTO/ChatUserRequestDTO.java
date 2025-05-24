@@ -8,5 +8,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ChatUserRequestDTO {
     private Long chatId;
-    private Long userId;
+    private String userId;
 }

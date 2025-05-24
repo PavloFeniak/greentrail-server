@@ -2,14 +2,15 @@ package com.example.mediaservice.entity.DTO;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Accessors(chain = true)
 public class MediaFileRequestDTO {
-    private String url;
+    private MultipartFile multipartFile;
     private String fileName;
     private String mimeType;
-    private Integer uploadedBy;
+    private String uploadedBy;
     private String relatedType;
     private Integer relatedId;
 }

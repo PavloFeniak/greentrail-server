@@ -21,8 +21,8 @@ public class JwtAuthenticationFilter implements GatewayFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-
-        if (request.getURI().getPath().startsWith("/auth-service/**")) {
+        String path = request.getURI().getPath();
+        if (    path.startsWith("/auth-service/**")) {
             return chain.filter(exchange);
         }
 
@@ -42,6 +42,9 @@ public class JwtAuthenticationFilter implements GatewayFilter {
                     .setSigningKey(SECRET_KEY)
                     .parseClaimsJws(token)
                     .getBody();
+
+            System.out.println("JWT Claims:");
+            claims.forEach((key, value) -> System.out.println(key + ": " + value));
 
             String email = claims.getSubject();
 

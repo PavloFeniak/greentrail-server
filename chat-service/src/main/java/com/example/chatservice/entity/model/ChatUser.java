@@ -21,7 +21,7 @@ public class ChatUser {
     private Chat chat;
 
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    private String userId;
 
     @Column(name = "joined_at")
     private LocalDateTime joinedAt = LocalDateTime.now();

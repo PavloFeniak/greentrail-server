@@ -8,6 +8,7 @@ import com.example.mediaservice.service.MediaFileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,17 +18,24 @@ import java.util.stream.Collectors;
 public class MediaFileServiceImpl implements MediaFileService {
 
     private final MediaFilesRepository mediaFilesRepository;
+    private  final AwsS3Service awsS3Service;
 
     @Override
     public MediaFileResponseDTO saveMediaFile(MediaFileRequestDTO requestDTO) {
         MediaFiles mediaFiles = new MediaFiles()
-            .setUrl(requestDTO.getUrl())
             .setFileName(requestDTO.getFileName())
             .setMimeType(requestDTO.getMimeType())
             .setUploadedBy(requestDTO.getUploadedBy())
             .setUploadedAt(LocalDateTime.now())
             .setRelatedType(requestDTO.getRelatedType())
             .setRelatedId(requestDTO.getRelatedId());
+
+        try {
+            String url = awsS3Service.uploadFile(requestDTO.getMultipartFile());
+            mediaFiles.setUrl(url);
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t upload file in S3 bucket", e);
+        }
         mediaFiles = mediaFilesRepository.save(mediaFiles);
         return mapToResponse(mediaFiles);
     }

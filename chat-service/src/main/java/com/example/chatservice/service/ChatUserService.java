@@ -8,5 +8,5 @@ import java.util.List;
 public interface ChatUserService {
     ChatUserResponseDTO addUserToChat(ChatUserRequestDTO request);
     List<ChatUserResponseDTO> getUsersInChat(Long chatId);
-    void markUserLeft(Long userId, Long chatId);
+    void markUserLeft(String userId, Long chatId);
 }

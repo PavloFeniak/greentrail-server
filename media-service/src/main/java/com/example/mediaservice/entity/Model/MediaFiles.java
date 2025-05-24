@@ -25,7 +25,7 @@ public class MediaFiles {
     private String mimeType;
 
     @Column(name = "uploaded_by", nullable = false)
-    private Integer uploadedBy;
+    private String uploadedBy;
 
     @Column(name = "uploaded_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime uploadedAt = LocalDateTime.now();

@@ -16,11 +16,16 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("user-service", r -> r.path("/user/**")
+                .route("user-service", r -> r.path("/user-service/**")
                         .filters(f -> f.filter(jwtAuthenticationFilter))
                         .uri("lb://user-service"))
+
+
+//                .route("trek-service-public")
+
                 .route("auth-service", r -> r.path("/auth/**")
                         .uri("lb://auth-service"))
+
                 .route("eclient", r -> r.path("/eclient/**")
                         .filters(f -> f.filter(jwtAuthenticationFilter))
                         .uri("lb://eclient-service"))
