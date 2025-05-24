@@ -10,4 +10,6 @@ public interface TrekService {
     TrekResponseDto getTrekById(Long id);
     List<TrekResponseDto> getAllTreks();
     void deleteTrek(Long id);
+
+    List<TrekResponseDto> getCreatorTreks(String id);
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TreksParticipantRepository extends JpaRepository<TrekParticipants, Long> {
     List<TrekParticipants> findByTrekId(Long id);
+    List<TrekParticipants> findByUserId(String id);
 }

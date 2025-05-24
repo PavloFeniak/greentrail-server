@@ -9,4 +9,5 @@ public interface TrekParticipantService {
     TrekParticipantResponseDto joinTrek(TrekParticipantRequestDto dto);
     List<TrekParticipantResponseDto> getParticipantsByTrekId(Long trekId);
     void updateStatus(Long participantId, String status); // approved / rejected
+    List<TrekParticipantResponseDto> getAllUserParticipation(String userId);
 }

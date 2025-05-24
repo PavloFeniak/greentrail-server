@@ -4,6 +4,7 @@ import com.example.trekservice.entity.DTO.TrekParticipantRequestDto;
 import com.example.trekservice.entity.DTO.TrekParticipantResponseDto;
 import com.example.trekservice.services.TrekParticipantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +35,15 @@ public class TrekParticipantController {
         trekParticipantService.updateStatus(participantId, status);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/user/participation")
+    public ResponseEntity<List<TrekParticipantResponseDto>> getUserParticipation(@RequestHeader("X-User-Email") String email) {
+        try{
+            List<TrekParticipantResponseDto> trekParticipantResponseDtos =
+                    trekParticipantService.getAllUserParticipation(email);
+            return ResponseEntity.ok(trekParticipantResponseDtos);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

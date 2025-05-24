@@ -26,7 +26,7 @@ public class TrekController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrekResponseDto> getTrekBuId(@PathVariable Long id) {
+    public ResponseEntity<TrekResponseDto> getTrekById(@PathVariable Long id) {
         try {
             TrekResponseDto trek = trekService.getTrekById(id);
             return ResponseEntity.ok(trek);
@@ -34,7 +34,15 @@ public class TrekController {
             return ResponseEntity.notFound().build();
         }
     }
-
+    @GetMapping("creator/treks")
+    public ResponseEntity<List<TrekResponseDto>> getCreatorTreks(@RequestHeader("X-User-Email") String email) {
+        try{
+            List<TrekResponseDto> treks = trekService.getCreatorTreks(email);
+            return ResponseEntity.ok(treks);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
     @GetMapping
     public ResponseEntity<List<TrekResponseDto>> getAllTreks() {
         List<TrekResponseDto> treks = trekService.getAllTreks();

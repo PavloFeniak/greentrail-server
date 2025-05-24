@@ -59,6 +59,15 @@ public class TrekServiceImpl implements TrekService {
         }
         else throw new RuntimeException("Trek not found");
     }
+
+    @Override
+    public List<TrekResponseDto> getCreatorTreks(String id) {
+        List<Treks> trekResponseDtos = treksRepository.findByCreatedBy(id);
+        return trekResponseDtos.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
     private TrekResponseDto mapToDto(Treks treks){
         return new TrekResponseDto()
                 .setId(treks.getId())

@@ -47,6 +47,15 @@ public class TrekParticipantServiceImpl implements TrekParticipantService {
         trekParticipants.setStatus(status);
         treksParticipantRepository.save(trekParticipants);
     }
+
+    @Override
+    public List<TrekParticipantResponseDto> getAllUserParticipation(String userId) {
+            List<TrekParticipants> trekParticipants = treksParticipantRepository.findByUserId(userId);
+            return trekParticipants.stream()
+                    .map(this::mapToDto)
+                    .collect(Collectors.toList());
+    }
+
     private TrekParticipantResponseDto mapToDto(TrekParticipants p) {
         TrekParticipantResponseDto dto = new TrekParticipantResponseDto();
         dto.setId(p.getId());
