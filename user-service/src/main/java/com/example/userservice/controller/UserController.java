@@ -30,10 +30,10 @@ public class UserController {
         return userService.updateUser(id, userUpdateDTO);
     }
 
-    @PostMapping
-    public UserResponseDTO addUser(@RequestBody UserRequestDTO userResponseDTO) {
-        return userService.addUser(userResponseDTO);
-    }
+//    @PostMapping
+//    public UserResponseDTO addUser(@RequestBody UserRequestDTO userResponseDTO) {
+//        return userService.addUser(userResponseDTO);
+//    }
 
 
 }

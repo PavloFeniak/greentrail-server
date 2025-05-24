@@ -13,7 +13,7 @@ public class RabbitConfig {
 
     @Bean
     public Queue userRegisteredQueue() {
-        return new Queue("trek.created", false);
+        return new Queue("chat.created", false);
     }
 
     @Bean

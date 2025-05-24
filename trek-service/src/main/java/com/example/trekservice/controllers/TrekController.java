@@ -1,10 +1,13 @@
 package com.example.trekservice.controllers;
 
+import com.example.trekservice.entity.DTO.TrekCreatedEvent;
 import com.example.trekservice.entity.DTO.TrekRequestDto;
 import com.example.trekservice.entity.DTO.TrekResponseDto;
 import com.example.trekservice.entity.models.Treks;
 import com.example.trekservice.services.TrekService;
+import com.example.trekservice.services.impl.TrekEventPublisher;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +21,16 @@ import java.util.Optional;
 public class TrekController {
 
     private final TrekService trekService;
+    @Autowired
+    private TrekEventPublisher eventPublisher;
 
     @PostMapping
     public ResponseEntity<TrekResponseDto> createTrek(@RequestBody TrekRequestDto trekRequestDto) {
         TrekResponseDto treks =  trekService.createTrek(trekRequestDto);
+
+        eventPublisher.sendTrekCreatedEvent(new TrekCreatedEvent()
+                .setTripId(treks.getId())
+                .setCreatedBy(treks.getCreatedBy()));
         return ResponseEntity.status(HttpStatus.CREATED).body(treks);
     }
 
