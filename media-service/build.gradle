@@ -21,6 +21,7 @@ configurations {
 
 repositories {
     mavenCentral()
+
 }
 
 ext {
@@ -48,6 +49,11 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-amqp")
 
+
+    implementation 'software.amazon.awssdk:s3:2.25.11'
+    implementation 'software.amazon.awssdk:core:2.25.11'
+    implementation 'software.amazon.awssdk:regions:2.25.11'
+    implementation 'software.amazon.awssdk:auth:2.25.11'
 }
 
 dependencyManagement {
