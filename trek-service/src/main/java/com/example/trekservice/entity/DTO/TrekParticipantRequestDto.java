@@ -7,6 +7,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class TrekParticipantRequestDto {
     private Long trekId;
-    private int userId;
+    private String userId;
     private String status;
 }

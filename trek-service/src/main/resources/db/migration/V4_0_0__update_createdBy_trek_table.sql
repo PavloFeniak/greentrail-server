@@ -1,0 +1,3 @@
+ALTER TABLE trek
+ALTER COLUMN created_by TYPE VARCHAR(255)
+USING created_by::VARCHAR;

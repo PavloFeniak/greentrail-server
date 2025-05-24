@@ -54,7 +54,7 @@ public class Treks {
     private String secondPhoto;
 
     @Column(name = "created_by", nullable = false)
-    private int createdBy;
+    private String createdBy;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();

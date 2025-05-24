@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class TrekParticipantResponseDto {
     private Long id;
     private Long trekId;
-    private int userId;
+    private String userId;
     private String status;
     private LocalDateTime joinedAt;
 }

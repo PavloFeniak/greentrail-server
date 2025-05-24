@@ -1,0 +1,3 @@
+ALTER TABLE trek_participants
+ALTER COLUMN user_id TYPE VARCHAR(255)
+USING user_id::VARCHAR;

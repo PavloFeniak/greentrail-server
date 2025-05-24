@@ -21,8 +21,8 @@ public class TrekParticipants {
     @JoinColumn(name = "trip_id", nullable = false)
     private Treks trek;
 
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
     @Column(name = "joined_at")
     private LocalDateTime joinedAt = LocalDateTime.now();

@@ -20,5 +20,5 @@ public class TrekRequestDto {
     private String nearestTown;
     private String firstPhoto;
     private String secondPhoto;
-    private int createdBy;
+    private String createdBy;
 }

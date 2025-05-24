@@ -21,6 +21,6 @@ public class TrekResponseDto {
     private String nearestTown;
     private String firstPhoto;
     private String secondPhoto;
-    private int createdBy;
+    private String createdBy;
     private LocalDateTime createdAt;
 }

@@ -26,6 +26,6 @@ public class UserParticipation {
     @Column(name = "joined_at")
     private LocalDateTime joinedAt = LocalDateTime.now();
 
-    @Column(name = "status", nullable = false)
-    private String satus;
+    @Column(name = "status")
+    private String satus = "active";
 }
