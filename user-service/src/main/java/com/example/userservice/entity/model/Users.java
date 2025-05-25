@@ -31,7 +31,7 @@ public class Users{
     private LocalDateTime dateOfCreation = LocalDateTime.now();
 
     @Column(name = "profile_picture", length = 225)
-    private String profilePicture;
+    private String profilePicture = "";
 
     @Column(name = "address", length = 100)
     private String address;

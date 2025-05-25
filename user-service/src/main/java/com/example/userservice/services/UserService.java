@@ -22,6 +22,7 @@ public class UserService {
     public UserResponseDTO getUserByEmail(String email) {
         Users user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        System.out.println("User: " + email + " found");
         return mapToDTO(user);
     }
 
@@ -54,6 +55,7 @@ public class UserService {
                 .setEmail(user.getEmail())
                 .setPhoneNumber(user.getPhoneNumber())
                 .setProfilePicture(user.getProfilePicture())
-                .setAddress(user.getAddress());
+                .setAddress(user.getAddress())
+                .setDateOfCreation(user.getDateOfCreation());
     }
 }

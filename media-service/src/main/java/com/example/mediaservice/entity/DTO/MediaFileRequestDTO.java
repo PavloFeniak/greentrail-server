@@ -10,7 +10,6 @@ public class MediaFileRequestDTO {
     private MultipartFile multipartFile;
     private String fileName;
     private String mimeType;
-    private String uploadedBy;
     private String relatedType;
     private Integer relatedId;
 }

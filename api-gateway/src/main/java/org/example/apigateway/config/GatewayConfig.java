@@ -17,11 +17,24 @@ public class GatewayConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("user-service", r -> r.path("/user-service/**")
-                        .filters(f -> f.filter(jwtAuthenticationFilter))
+                        .filters(f -> f
+                                .filter(jwtAuthenticationFilter)
+                                .stripPrefix(1)
+                        )
                         .uri("lb://user-service"))
 
-
-//                .route("trek-service-public")
+                .route("trek-service", r -> r.path("/trek-service/**")
+                        .filters(f -> f
+                                .filter(jwtAuthenticationFilter)
+                                .stripPrefix(1)
+                        )
+                        .uri("lb://trek-service"))
+                .route("media-service", r -> r.path("/media-service/**")
+                        .filters(f -> f
+                                .filter(jwtAuthenticationFilter)
+                                .stripPrefix(1)
+                        )
+                        .uri("lb://media-service"))
 
                 .route("auth-service", r -> r.path("/auth/**")
                         .uri("lb://auth-service"))

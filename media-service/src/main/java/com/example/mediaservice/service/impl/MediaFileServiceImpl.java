@@ -21,11 +21,11 @@ public class MediaFileServiceImpl implements MediaFileService {
     private  final AwsS3Service awsS3Service;
 
     @Override
-    public MediaFileResponseDTO saveMediaFile(MediaFileRequestDTO requestDTO) {
+    public String saveMediaFile(MediaFileRequestDTO requestDTO, String email) {
         MediaFiles mediaFiles = new MediaFiles()
             .setFileName(requestDTO.getFileName())
             .setMimeType(requestDTO.getMimeType())
-            .setUploadedBy(requestDTO.getUploadedBy())
+            .setUploadedBy(email)
             .setUploadedAt(LocalDateTime.now())
             .setRelatedType(requestDTO.getRelatedType())
             .setRelatedId(requestDTO.getRelatedId());
@@ -37,7 +37,7 @@ public class MediaFileServiceImpl implements MediaFileService {
             throw new RuntimeException("Can`t upload file in S3 bucket", e);
         }
         mediaFiles = mediaFilesRepository.save(mediaFiles);
-        return mapToResponse(mediaFiles);
+        return mediaFiles.getUrl();
     }
 
     @Override

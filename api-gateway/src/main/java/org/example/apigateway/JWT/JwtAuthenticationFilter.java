@@ -22,7 +22,11 @@ public class JwtAuthenticationFilter implements GatewayFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
-        if (    path.startsWith("/auth-service/**")) {
+        if (    path.startsWith("/auth-service/**")||
+                path.startsWith("/trek-service/treks/get-all-treks")||
+                path.startsWith("/user-service/users/user-by-email")||
+                path.startsWith("/trek-service/treks/get-part-of-all-treks")||
+                path.matches("/trek-service/treks/\\d+")) {
             return chain.filter(exchange);
         }
 
@@ -49,7 +53,7 @@ public class JwtAuthenticationFilter implements GatewayFilter {
             String email = claims.getSubject();
 
             ServerHttpRequest modifiedRequest = request.mutate()
-                    .header("X-Username", email)
+                    .header("X-User-Email", email)
                     .build();
 
             return chain.filter(exchange.mutate().request(modifiedRequest).build());

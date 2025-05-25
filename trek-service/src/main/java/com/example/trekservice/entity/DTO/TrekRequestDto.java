@@ -12,7 +12,7 @@ public class TrekRequestDto {
     private String title;
     private String description;
     private LocalDateTime startDate;
-    private Date endDate;
+    private LocalDateTime endDate;
     private Double startLatitude;
     private Double startLongitude;
     private Double endLatitude;
@@ -20,5 +20,4 @@ public class TrekRequestDto {
     private String nearestTown;
     private String firstPhoto;
     private String secondPhoto;
-    private String createdBy;
 }

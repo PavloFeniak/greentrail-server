@@ -19,7 +19,7 @@ public class TrekServiceImpl implements TrekService {
     private final TreksRepository treksRepository;
 
     @Override
-    public TrekResponseDto createTrek(TrekRequestDto dto) {
+    public TrekResponseDto createTrek(TrekRequestDto dto, String email) {
         Treks treks = new Treks()
                 .setTitle(dto.getTitle())
                 .setDescription(dto.getDescription())
@@ -32,7 +32,7 @@ public class TrekServiceImpl implements TrekService {
                 .setNearestTown(dto.getNearestTown())
                 .setFirstPhoto(dto.getFirstPhoto())
                 .setSecondPhoto(dto.getSecondPhoto())
-                .setCreatedBy(dto.getCreatedBy())
+                .setCreatedBy(email)
                 .setCreatedAt(LocalDateTime.now());
         treks = treksRepository.save(treks);
         return mapToDto(treks);
@@ -68,6 +68,14 @@ public class TrekServiceImpl implements TrekService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TrekResponseDto> getTreksLimited(int maxCount) {
+        List<Treks> treks = treksRepository.findTopN(maxCount);
+        return treks.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
     private TrekResponseDto mapToDto(Treks treks){
         return new TrekResponseDto()
                 .setId(treks.getId())
@@ -85,4 +93,5 @@ public class TrekServiceImpl implements TrekService {
                 .setCreatedBy(treks.getCreatedBy())
                 .setCreatedAt(treks.getCreatedAt());
     }
+     
 }

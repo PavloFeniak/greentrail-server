@@ -21,7 +21,11 @@ public class UserController {
     }
 
     @GetMapping("/email")
-    public UserResponseDTO getUserByEmail(@RequestParam String email) {
+    public UserResponseDTO getUserByEmail(@RequestHeader("X-User-Email") String email) {
+        return userService.getUserByEmail(email);
+    }
+    @GetMapping("/user-by-email")
+    public UserResponseDTO getTrekUserByEmail(@RequestParam String email) {
         return userService.getUserByEmail(email);
     }
 

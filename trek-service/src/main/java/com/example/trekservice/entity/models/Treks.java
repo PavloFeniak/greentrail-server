@@ -29,7 +29,7 @@ public class Treks {
     private LocalDateTime startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDateTime endDate;
 
     @Column(name = "start_latitude", nullable = false)
     private Double startLatitude;

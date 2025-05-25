@@ -6,7 +6,7 @@ import com.example.mediaservice.entity.DTO.MediaFileResponseDTO;
 import java.util.List;
 
 public interface MediaFileService {
-    MediaFileResponseDTO saveMediaFile(MediaFileRequestDTO requestDTO);
+    String saveMediaFile(MediaFileRequestDTO requestDTO, String email);
     List<MediaFileResponseDTO> getAllMediaFiles();
     MediaFileResponseDTO getMediaFileById(Long id);
     void deleteMediaFile(Long id);

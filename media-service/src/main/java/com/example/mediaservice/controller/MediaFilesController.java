@@ -24,8 +24,8 @@ public class MediaFilesController {
     private final AwsS3Service awsS3Service;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<MediaFileResponseDTO> uploadMedia(@ModelAttribute MediaFileRequestDTO requestDTO) {
-        MediaFileResponseDTO saved = mediaFileService.saveMediaFile(requestDTO);
+    public ResponseEntity<String> uploadMedia(@RequestHeader("X-User-Email") String email, @ModelAttribute MediaFileRequestDTO requestDTO) {
+        String saved = mediaFileService.saveMediaFile(requestDTO, email);
         return ResponseEntity.ok(saved);
     }
 

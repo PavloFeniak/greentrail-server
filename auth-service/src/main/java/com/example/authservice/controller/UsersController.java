@@ -2,6 +2,7 @@ package com.example.authservice.controller;
 
 import com.example.authservice.entity.DTO.AuthRequest;
 import com.example.authservice.entity.DTO.AuthResponse;
+import com.example.authservice.entity.DTO.LoginRequestDTO;
 import com.example.authservice.entity.DTO.UserRegisteredEvent;
 import com.example.authservice.entity.model.Users;
 import com.example.authservice.jwt.JwtUtil;
@@ -68,7 +69,7 @@ public class UsersController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequestDTO authRequest) {
         try {
             authenticationManager.authenticate( 
                     new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())

@@ -8,5 +8,5 @@ import lombok.experimental.Accessors;
 public class TrekParticipantRequestDto {
     private Long trekId;
     private String userId;
-    private String status;
+    private String status = "PENDING";
 }

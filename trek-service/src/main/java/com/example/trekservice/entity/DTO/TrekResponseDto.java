@@ -13,7 +13,7 @@ public class TrekResponseDto {
     private String title;
     private String description;
     private LocalDateTime startDate;
-    private Date endDate;
+    private LocalDateTime endDate;
     private Double startLatitude;
     private Double startLongitude;
     private Double endLatitude;

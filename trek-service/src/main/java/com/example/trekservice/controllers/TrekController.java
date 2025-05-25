@@ -1,9 +1,11 @@
 package com.example.trekservice.controllers;
 
 import com.example.trekservice.entity.DTO.TrekCreatedEvent;
+import com.example.trekservice.entity.DTO.TrekParticipantRequestDto;
 import com.example.trekservice.entity.DTO.TrekRequestDto;
 import com.example.trekservice.entity.DTO.TrekResponseDto;
 import com.example.trekservice.entity.models.Treks;
+import com.example.trekservice.services.TrekParticipantService;
 import com.example.trekservice.services.TrekService;
 import com.example.trekservice.services.impl.TrekEventPublisher;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +23,17 @@ import java.util.Optional;
 public class TrekController {
 
     private final TrekService trekService;
+    private  final TrekParticipantService trekParticipantService;
     @Autowired
     private TrekEventPublisher eventPublisher;
 
     @PostMapping
-    public ResponseEntity<TrekResponseDto> createTrek(@RequestBody TrekRequestDto trekRequestDto) {
-        TrekResponseDto treks =  trekService.createTrek(trekRequestDto);
-
+    public ResponseEntity<TrekResponseDto> createTrek(@RequestHeader("X-User-Email") String email,  @RequestBody TrekRequestDto trekRequestDto) {
+        TrekResponseDto treks =  trekService.createTrek(trekRequestDto, email);
+        trekParticipantService.joinTrek(new TrekParticipantRequestDto()
+                .setTrekId(treks.getId())
+                .setUserId(email)
+                .setStatus("ACCEPTED"));
         eventPublisher.sendTrekCreatedEvent(new TrekCreatedEvent()
                 .setTripId(treks.getId())
                 .setCreatedBy(treks.getCreatedBy()));
@@ -52,9 +58,17 @@ public class TrekController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping
+    @GetMapping("/get-all-treks")
     public ResponseEntity<List<TrekResponseDto>> getAllTreks() {
         List<TrekResponseDto> treks = trekService.getAllTreks();
+        if (treks.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(treks);
+    }
+    @GetMapping("/get-part-of-all-treks")
+    public ResponseEntity<List<TrekResponseDto>> getPartOfAllTreks(@RequestParam int maxCount) {
+        List<TrekResponseDto> treks = trekService.getTreksLimited(maxCount);
         if (treks.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
