@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: greentrail-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /eureka-service
+            backend:
+              service:
+                name: eureka-service
+                port:
+                  number: 8761

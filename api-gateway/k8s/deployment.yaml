@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+  labels:
+    app: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: api-gateway:local
+          ports:
+            - containerPort: 8082
+          env:
+#            - name: spring.mvc.servlet.path
+#              value: /api-gateway
+#            - name: DATASOURCE_HOST
+#              value: 192.168.1.101
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s

@@ -16,28 +16,37 @@ public class GatewayConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("user-service", r -> r.path("/user-service/**")
+                .route("user-service", r -> r.path("/api-gateway/user-service/**")
                         .filters(f -> f
                                 .filter(jwtAuthenticationFilter)
-                                .stripPrefix(1)
+                                .stripPrefix(2)
                         )
-                        .uri("lb://user-service"))
+                        .uri("http://user-service:8085"))
 
-                .route("trek-service", r -> r.path("/trek-service/**")
+                .route("trek-service", r -> r.path("/api-gateway//trek-service/**")
                         .filters(f -> f
                                 .filter(jwtAuthenticationFilter)
-                                .stripPrefix(1)
+                                .stripPrefix(2)
                         )
-                        .uri("lb://trek-service"))
-                .route("media-service", r -> r.path("/media-service/**")
+                        .uri("http://trek-service:8081"))
+                .route("media-service", r -> r.path("/api-gateway/media-service/**")
                         .filters(f -> f
                                 .filter(jwtAuthenticationFilter)
-                                .stripPrefix(1)
+                                .stripPrefix(2)
                         )
-                        .uri("lb://media-service"))
+                        .uri("http://media-service:8086"))
 
-                .route("auth-service", r -> r.path("/auth/**")
-                        .uri("lb://auth-service"))
+                .route("auth-service", r -> r.path("/api-gateway/auth-service/**")
+                        .filters(f -> f
+                                .stripPrefix(1)
+                        )
+                        .uri("http://auth-service:8088"))
+
+                .route("chat-service", r -> r.path("/api-gateway/chat-service/**")
+                        .filters(f -> f
+                                .stripPrefix(1)
+                        )
+                        .uri("http://chat-service:8087"))
 
                 .route("eclient", r -> r.path("/eclient/**")
                         .filters(f -> f.filter(jwtAuthenticationFilter))
