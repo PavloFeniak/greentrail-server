@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-service
+  labels:
+    app: chat-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-service
+  template:
+    metadata:
+      labels:
+        app: chat-service
+    spec:
+      containers:
+        - name: chat-service
+          image: chat-service:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8087
+          env:
+            - name: spring.mvc.servlet.path
+              value: /chat-service
+            - name: DATASOURCE_HOST
+#              value: 192.168.1.101
+              value: 10.137.234.75
+            - name: SPRING_RABBITMQ_HOST
+#              value: 192.168.1.101
+              value: 10.137.234.75

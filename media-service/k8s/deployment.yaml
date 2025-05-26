@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: media-service
+  labels:
+    app: media-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: media-service
+  template:
+    metadata:
+      labels:
+        app: media-service
+    spec:
+      containers:
+        - name: media-service
+          image: media-service:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8086
+          env:
+            - name: spring.mvc.servlet.path
+              value: /media-service
+            - name: DATASOURCE_HOST
+#              value: 192.168.1.101
+              value: 10.137.234.75
+            - name: SPRING_RABBITMQ_HOST
+#              value: 192.168.1.101
+              value: 10.137.234.75

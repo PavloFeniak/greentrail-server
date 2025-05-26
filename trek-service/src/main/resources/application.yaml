@@ -10,6 +10,11 @@ spring:
     locations: classpath:db/migration
   application:
     name: trek-service
+  rabbitmq:
+    host: ${SPRING_RABBITMQ_HOST}
+    port: 5672
+    username: guest
+    password: guest
 
 springdoc:
   api-docs:
@@ -20,11 +25,6 @@ springdoc:
     url: /trek-service/v3/api-docs
 
 
-rabbitmq:
-  host: localhost
-  port: 5672
-  username: guest
-  password: guest
 
 
 server:
@@ -32,15 +32,16 @@ server:
 
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-    #      defaultZone: http://eureka-server:8761/eureka/
-    registry-fetch-interval-seconds: 5
-    initial-instance-info-replication-interval-seconds: 5
-    register-with-eureka: true
-    fetch-registry: true
-  server:
-    enable-self-preservation: false
-  instance:
-    instance-id: ${spring.application.name}:${server.port}
-    prefer-ip-address: true
+    enabled: false
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
+#    #      defaultZone: http://eureka-server:8761/eureka/
+#    registry-fetch-interval-seconds: 5
+#    initial-instance-info-replication-interval-seconds: 5
+#    register-with-eureka: true
+#    fetch-registry: true
+#  server:
+#    enable-self-preservation: false
+#  instance:
+#    instance-id: ${spring.application.name}:${server.port}
+#    prefer-ip-address: true

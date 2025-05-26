@@ -15,24 +15,25 @@ public class GatewayConfig {
 
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+        System.out.println("Custom RouteLocator\n\n");
         return builder.routes()
                 .route("user-service", r -> r.path("/api-gateway/user-service/**")
                         .filters(f -> f
                                 .filter(jwtAuthenticationFilter)
-                                .stripPrefix(2)
+                                .stripPrefix(1)
                         )
                         .uri("http://user-service:8085"))
 
-                .route("trek-service", r -> r.path("/api-gateway//trek-service/**")
+                .route("trek-service", r -> r.path("/api-gateway/trek-service/**")
                         .filters(f -> f
                                 .filter(jwtAuthenticationFilter)
-                                .stripPrefix(2)
+                                .stripPrefix(1)
                         )
                         .uri("http://trek-service:8081"))
                 .route("media-service", r -> r.path("/api-gateway/media-service/**")
                         .filters(f -> f
                                 .filter(jwtAuthenticationFilter)
-                                .stripPrefix(2)
+                                .stripPrefix(1)
                         )
                         .uri("http://media-service:8086"))
 

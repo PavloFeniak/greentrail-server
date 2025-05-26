@@ -20,6 +20,8 @@ public class JwtAuthenticationFilter implements GatewayFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        System.out.println("INJWTFILTER");
+
         ServerHttpRequest request = exchange.getRequest();
         String path = request.getURI().getPath();
         if (    path.startsWith("/api-gateway/auth-service/**")||

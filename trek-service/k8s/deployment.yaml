@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trek-service
+  labels:
+    app: trek-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trek-service
+  template:
+    metadata:
+      labels:
+        app: trek-service
+    spec:
+      containers:
+        - name: trek-service
+          image: trek-service:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          env:
+            - name: spring.mvc.servlet.path
+              value: /trek-service
+            - name: DATASOURCE_HOST
+#              value: 192.168.1.101
+              value: 10.137.234.75
+            - name: SPRING_RABBITMQ_HOST
+#              value: 192.168.1.101
+              value: 10.137.234.75

@@ -69,3 +69,32 @@ spec:
                 name: api-gateway
                 port:
                   number: 8082
+          - pathType: Prefix
+            path: /user-service
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 8085
+          - pathType: Prefix
+            path: /trek-service
+            backend:
+              service:
+                name: trek-service
+                port:
+                  number: 8081
+          - pathType: Prefix
+            path: /media-service
+            backend:
+              service:
+                name: media-service
+                port:
+                  number: 8086
+          - pathType: Prefix
+            path: /chat-service
+            backend:
+              service:
+                name: chat-service
+                port:
+                  number: 8087
+
