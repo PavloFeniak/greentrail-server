@@ -24,6 +24,14 @@ springdoc:
     config-url: /auth-service/v3/api-docs/swagger-config
     url: /auth-service/v3/api-docs
 
+otel:
+  resource:
+    attributes: service.name=auth-service
+  exporter:
+    otlp:
+      endpoint: http://otel-collector:4317
+  traces:
+    exporter: otlp
 
 
 server:

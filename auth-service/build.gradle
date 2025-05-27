@@ -52,7 +52,10 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     implementation("org.springframework.boot:spring-boot-starter-amqp")
-
+    implementation 'io.opentelemetry:opentelemetry-sdk'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+// https://mvnrepository.com/artifact/io.opentelemetry.instrumentation/opentelemetry-instrumentation-api
+    implementation("io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:2.13.3")
 
 }
 

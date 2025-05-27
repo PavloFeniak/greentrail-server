@@ -41,7 +41,8 @@ public class GatewayConfig {
                         .filters(f -> f
                                 .stripPrefix(1)
                         )
-                        .uri("http://auth-service:8088"))
+                        .uri("http://auth-service:8080"))
+
 
                 .route("chat-service", r -> r.path("/api-gateway/chat-service/**")
                         .filters(f -> f

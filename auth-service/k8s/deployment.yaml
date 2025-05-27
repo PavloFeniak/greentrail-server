@@ -24,10 +24,13 @@ spec:
             - name: spring.mvc.servlet.path
               value: /auth-service
             - name: DATASOURCE_HOST
-#              value: 192.168.1.101
-              value: 10.137.234.75
+              value: 10.208.147.76
             - name: SPRING_RABBITMQ_HOST
-#              value: 192.168.1.101
-              value: 10.137.234.75
-#            - name: SPRING_PROFILES_ACTIVE
-#              value: k8s
+              value: 10.208.147.76
+
+        - name: auth-sidecar
+          image: auth-sidecar:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+            - containerPort: 9145

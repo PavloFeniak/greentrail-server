@@ -8,6 +8,8 @@ import com.example.authservice.entity.model.Users;
 import com.example.authservice.jwt.JwtUtil;
 import com.example.authservice.repository.UsersRepository;
 import com.example.authservice.service.UserEventPublisher;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,18 @@ public class UsersController {
     public Users getUser(@RequestBody Users user) {
         return user;
     }
-
+//    @Autowired
+//    private Tracer tracer;
+//
+//    @GetMapping("/ping")
+//    public String ping() {
+//        Span span = tracer.spanBuilder("custom-ping-span").startSpan();
+//        try {
+//            return "pong";
+//        } finally {
+//            span.end();
+//        }
+//    }
     @GetMapping("/hello")
     public String hello() {return "hello";}
     @Autowired
@@ -69,6 +82,7 @@ public class UsersController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequestDTO authRequest) {
+        System.out.println("User try to login with email:"+authRequest.getEmail());
         try {
             authenticationManager.authenticate( 
                     new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword())

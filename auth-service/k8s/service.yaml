@@ -6,6 +6,11 @@ spec:
   selector:
     app: auth-service
   ports:
-    - protocol: TCP
+    - name: sidecar-port
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: app-port
+      protocol: TCP
       port: 8088
       targetPort: 8088
