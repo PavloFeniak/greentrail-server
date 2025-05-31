@@ -24,7 +24,11 @@ springdoc:
     config-url: /user-service/v3/api-docs/swagger-config
     url: /user-service/v3/api-docs
 
-
+logging:
+  file:
+    name: /var/log/user-service/app.log
+  level:
+    root: INFO
 
 
 server:

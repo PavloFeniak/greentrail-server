@@ -2,6 +2,8 @@ package com.example.mediaservice.controller;
 
 import com.example.mediaservice.entity.DTO.MediaFileRequestDTO;
 import com.example.mediaservice.entity.DTO.MediaFileResponseDTO;
+import com.example.mediaservice.entity.DTO.MultiPartMediaFilesRequestDTO;
+import com.example.mediaservice.entity.DTO.MultipartMediaFileResponseDTO;
 import com.example.mediaservice.service.MediaFileService;
 import com.example.mediaservice.service.impl.AwsS3Service;
 import jakarta.validation.Valid;
@@ -26,6 +28,13 @@ public class MediaFilesController {
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadMedia(@RequestHeader("X-User-Email") String email, @ModelAttribute MediaFileRequestDTO requestDTO) {
         String saved = mediaFileService.saveMediaFile(requestDTO, email);
+        return ResponseEntity.ok(saved);
+    }
+    @PostMapping(path = "/multipart-upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<MultipartMediaFileResponseDTO> uploadSeveralMedia(@RequestHeader("X-User-Email") String email, @ModelAttribute MultiPartMediaFilesRequestDTO requestDTO) {
+        System.out.println("first file: " + requestDTO.getOriginal().getOriginalFilename());
+        System.out.println("second file: " + requestDTO.getThumbnail().getOriginalFilename());
+        MultipartMediaFileResponseDTO saved = mediaFileService.saveSeveralMediaFiles(requestDTO, email);
         return ResponseEntity.ok(saved);
     }
 

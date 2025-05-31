@@ -2,6 +2,8 @@ package com.example.mediaservice.service.impl;
 
 import com.example.mediaservice.entity.DTO.MediaFileRequestDTO;
 import com.example.mediaservice.entity.DTO.MediaFileResponseDTO;
+import com.example.mediaservice.entity.DTO.MultiPartMediaFilesRequestDTO;
+import com.example.mediaservice.entity.DTO.MultipartMediaFileResponseDTO;
 import com.example.mediaservice.entity.Model.MediaFiles;
 import com.example.mediaservice.repository.MediaFilesRepository;
 import com.example.mediaservice.service.MediaFileService;
@@ -43,6 +45,29 @@ public class MediaFileServiceImpl implements MediaFileService {
     @Override
     public List<MediaFileResponseDTO> getAllMediaFiles() {
         return mediaFilesRepository.findAll().stream().map(this::mapToResponse).collect(Collectors.toList());
+    }
+    @Override
+    public MultipartMediaFileResponseDTO saveSeveralMediaFiles(MultiPartMediaFilesRequestDTO requestDTO, String email) {
+        MediaFiles mediaFiles = new MediaFiles()
+                .setFileName(requestDTO.getFileName())
+                .setMimeType(requestDTO.getMimeType())
+                .setUploadedBy(email)
+                .setUploadedAt(LocalDateTime.now())
+                .setRelatedType(requestDTO.getRelatedType())
+                .setRelatedId(requestDTO.getRelatedId());
+
+        try {
+            String originalUrl = awsS3Service.uploadFile(requestDTO.getOriginal());
+            mediaFiles.setUrl(originalUrl);
+            String thumbnailUrl = awsS3Service.uploadFile(requestDTO.getThumbnail());
+            mediaFiles.setUrl(thumbnailUrl);
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t upload file in S3 bucket", e);
+        }
+        mediaFiles = mediaFilesRepository.save(mediaFiles);
+        return new MultipartMediaFileResponseDTO()
+                .setOriginalUrl(mediaFiles.getUrl())
+                .setThumbnailUrl(mediaFiles.getUrl());
     }
 
     @Override

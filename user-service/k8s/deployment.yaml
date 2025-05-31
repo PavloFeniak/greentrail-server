@@ -15,6 +15,7 @@ spec:
         app: user-service
     spec:
       containers:
+        # Основний сервіс
         - name: user-service
           image: user-service:local
           imagePullPolicy: IfNotPresent
@@ -24,8 +25,22 @@ spec:
             - name: spring.mvc.servlet.path
               value: /user-service
             - name: DATASOURCE_HOST
-#              value: 192.168.1.101
-              value: 10.208.147.76
+              value: 192.168.55.75
             - name: SPRING_RABBITMQ_HOST
-#              value: 192.168.1.101
-              value: 10.208.147.76
+              value: 192.168.55.75
+          volumeMounts:
+            # Маунтимо директорію для логів
+            - name: logs
+              mountPath: /var/log/user-service
+
+        # Fluent Bit сайдкар
+        - name: fluent-bit-sidecar
+          image: logging-sidecar:local
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: logs
+              mountPath: /var/log/user-service
+
+      volumes:
+        - name: logs
+          emptyDir: {}

@@ -1,11 +1,14 @@
 package org.example.apigateway.config;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Timer;
 import org.example.apigateway.JWT.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.server.WebFilter;
 
 @Configuration
 public class GatewayConfig {
@@ -35,7 +38,7 @@ public class GatewayConfig {
                                 .filter(jwtAuthenticationFilter)
                                 .stripPrefix(1)
                         )
-                        .uri("http://media-service:8086"))
+                        .uri("http://media-service:8090"))
 
                 .route("auth-service", r -> r.path("/api-gateway/auth-service/**")
                         .filters(f -> f
@@ -56,4 +59,27 @@ public class GatewayConfig {
 
                 .build();
     }
+
+    @Bean
+    public WebFilter metricsWebFilter(MeterRegistry registry) {
+        return (exchange, chain) -> {
+            String path = exchange.getRequest().getPath().value();
+            Timer.Sample sample = Timer.start(registry);
+            return chain.filter(exchange).doOnSuccess(aVoid -> {
+                String method = exchange.getRequest().getMethod() != null
+                        ? exchange.getRequest().getMethod().name()
+                        : "UNKNOWN";
+                String status = exchange.getResponse().getStatusCode() != null
+                        ? String.valueOf(exchange.getResponse().getStatusCode().value())
+                        : "UNKNOWN";
+
+                sample.stop(Timer.builder("http_server_requests")
+                        .tag("method", method)
+                        .tag("uri", path)
+                        .tag("status", status)
+                        .register(registry));
+            });
+        };
+    }
+
 }
