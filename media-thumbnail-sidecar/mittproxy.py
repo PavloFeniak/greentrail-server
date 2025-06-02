@@ -5,9 +5,15 @@ from requests_toolbelt.multipart import decoder, encoder
 def request(flow: http.HTTPFlow) -> None:
     print("lets-go")
     if flow.request.method != "POST" or "/multipart-upload" not in flow.request.path:
+        flow.request.host = "media-service"
+        flow.request.port = 8086
+        flow.request.scheme = "http"
         return
     content_type = flow.request.headers.get("content-type", "")
     if "multipart/form-data" not in content_type:
+        flow.request.host = "media-service"
+        flow.request.port = 8086
+        flow.request.scheme = "http"
         return
 
     multipart_data = decoder.MultipartDecoder(flow.request.raw_content, content_type)
@@ -55,3 +61,6 @@ def request(flow: http.HTTPFlow) -> None:
     # Заміна тіла запиту та заголовків
     flow.request.headers["Content-Type"] = multipart_encoder.content_type
     flow.request.content = multipart_encoder.to_string()
+    flow.request.host = "media-service"
+    flow.request.port = 8086
+    flow.request.scheme = "http"

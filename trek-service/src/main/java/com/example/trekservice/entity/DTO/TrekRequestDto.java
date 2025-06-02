@@ -20,4 +20,5 @@ public class TrekRequestDto {
     private String nearestTown;
     private String firstPhoto;
     private String secondPhoto;
+    private String previewImage;
 }

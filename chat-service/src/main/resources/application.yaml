@@ -26,6 +26,11 @@ springdoc:
 
 
 
+logging:
+  file:
+    name: /var/log/trek-service/app.log
+  level:
+    root: INFO
 server:
   port: 8087
 

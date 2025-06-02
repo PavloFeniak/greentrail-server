@@ -55,19 +55,19 @@ public class MediaFileServiceImpl implements MediaFileService {
                 .setUploadedAt(LocalDateTime.now())
                 .setRelatedType(requestDTO.getRelatedType())
                 .setRelatedId(requestDTO.getRelatedId());
-
+        String thumbnailUrl;
         try {
             String originalUrl = awsS3Service.uploadFile(requestDTO.getOriginal());
             mediaFiles.setUrl(originalUrl);
-            String thumbnailUrl = awsS3Service.uploadFile(requestDTO.getThumbnail());
-            mediaFiles.setUrl(thumbnailUrl);
+             thumbnailUrl = awsS3Service.uploadFile(requestDTO.getThumbnail());
+//            mediaFiles.setUrl(thumbnailUrl);
         } catch (IOException e) {
             throw new RuntimeException("Can`t upload file in S3 bucket", e);
         }
         mediaFiles = mediaFilesRepository.save(mediaFiles);
         return new MultipartMediaFileResponseDTO()
                 .setOriginalUrl(mediaFiles.getUrl())
-                .setThumbnailUrl(mediaFiles.getUrl());
+                .setThumbnailUrl(thumbnailUrl);
     }
 
     @Override

@@ -24,9 +24,9 @@ spec:
             - name: spring.mvc.servlet.path
               value: /auth-service
             - name: DATASOURCE_HOST
-              value: 192.168.55.75
+              value: 192.168.227.75
             - name: SPRING_RABBITMQ_HOST
-              value: 192.168.55.75
+              value: 192.168.227.75
 
         - name: auth-sidecar
           image: auth-sidecar:local

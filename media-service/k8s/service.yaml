@@ -8,8 +8,8 @@ spec:
   ports:
     - name: sidecar-port
       protocol: TCP
-      port: 9090
-      targetPort: 9090
+      port: 9650
+      targetPort: 9650
     - name: app-port
       protocol: TCP
       port: 8086

@@ -22,5 +22,6 @@ public class TrekResponseDto {
     private String firstPhoto;
     private String secondPhoto;
     private String createdBy;
+    private String previewImage;
     private LocalDateTime createdAt;
 }

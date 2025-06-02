@@ -32,6 +32,7 @@ public class TrekServiceImpl implements TrekService {
                 .setNearestTown(dto.getNearestTown())
                 .setFirstPhoto(dto.getFirstPhoto())
                 .setSecondPhoto(dto.getSecondPhoto())
+                .setPreviewImage(dto.getPreviewImage())
                 .setCreatedBy(email)
                 .setCreatedAt(LocalDateTime.now());
         treks = treksRepository.save(treks);
@@ -90,6 +91,7 @@ public class TrekServiceImpl implements TrekService {
                 .setNearestTown(treks.getNearestTown())
                 .setFirstPhoto(treks.getFirstPhoto())
                 .setSecondPhoto(treks.getSecondPhoto())
+                .setPreviewImage(treks.getPreviewImage())
                 .setCreatedBy(treks.getCreatedBy())
                 .setCreatedAt(treks.getCreatedAt());
     }

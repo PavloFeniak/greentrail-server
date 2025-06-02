@@ -8,7 +8,7 @@ if not prometheus or not metric_requests then
     return ngx.exit(500)
 end
 
-local lim, err = limit_req.new("limits", 0.0833, 20)
+local lim, err = limit_req.new("limits", 5, 10)
 if not lim then
     ngx.log(ngx.ERR, "failed to instantiate limiter: ", err)
     return ngx.exit(500)

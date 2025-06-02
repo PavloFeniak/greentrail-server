@@ -24,17 +24,19 @@ spec:
             - name: spring.mvc.servlet.path
               value: /media-service
             - name: DATASOURCE_HOST
-              value: 192.168.55.75
+              value: 192.168.227.75
             - name: SPRING_RABBITMQ_HOST
-              value: 192.168.55.75
+              value: 192.168.227.75
+
           volumeMounts:
             - name: shared-images
               mountPath: /images
 
         - name: thumbnail-sidecar
+          imagePullPolicy: IfNotPresent
           image: thumbnail-sidecar:local
           ports:
-            - containerPort: 9090
+            - containerPort: 9650
 
 
       volumes:

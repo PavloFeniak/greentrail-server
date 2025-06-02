@@ -48,4 +48,11 @@ spec:
                 name: chat-service
                 port:
                   number: 8087
+          - pathType: Prefix
+            path: /grafana
+            backend:
+              service:
+                name: grafana
+                port:
+                  number: 3000
 

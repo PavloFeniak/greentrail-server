@@ -25,7 +25,14 @@ spec:
               value: /trek-service
             - name: DATASOURCE_HOST
 #              value: 192.168.1.101
-              value: 192.168.55.75
+              value: 192.168.227.75
             - name: SPRING_RABBITMQ_HOST
 #              value: 192.168.1.101
-              value: 192.168.55.75
+              value: 192.168.227.75
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "200Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"

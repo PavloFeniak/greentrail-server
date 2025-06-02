@@ -50,6 +50,9 @@ public class Treks {
     @Column(name = "first_photo")
     private String firstPhoto;
 
+    @Column(name = "preview_image")
+    private String previewImage;
+
     @Column(name = "second_photo")
     private String secondPhoto;
 

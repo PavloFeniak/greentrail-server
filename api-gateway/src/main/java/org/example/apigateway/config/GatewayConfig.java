@@ -38,7 +38,7 @@ public class GatewayConfig {
                                 .filter(jwtAuthenticationFilter)
                                 .stripPrefix(1)
                         )
-                        .uri("http://media-service:8090"))
+                        .uri("http://media-service:9650"))
 
                 .route("auth-service", r -> r.path("/api-gateway/auth-service/**")
                         .filters(f -> f

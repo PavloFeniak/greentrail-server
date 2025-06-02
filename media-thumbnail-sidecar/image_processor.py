@@ -1,9 +1,9 @@
 from PIL import Image
 import io
 
-def generate_thumbnail(image_bytes: bytes, size=(128, 128)) -> bytes:
+def generate_thumbnail(image_bytes: bytes, size=(256, 256)) -> bytes:
     image = Image.open(io.BytesIO(image_bytes))
-    image.thumbnail(size)
+    image.thumbnail(size, resample=Image.LANCZOS)  # <-- важливо!
     buf = io.BytesIO()
     image.save(buf, format="JPEG")
     return buf.getvalue()

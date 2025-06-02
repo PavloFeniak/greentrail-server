@@ -28,4 +28,4 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 
 COPY . /app
 
-ENTRYPOINT ["mitmdump", "-s", "mittproxy.py", "--mode", "regular", "--listen-port", "9090"]
+ENTRYPOINT ["mitmdump", "-s", "mittproxy.py", "--mode", "regular", "--listen-port", "9650"]

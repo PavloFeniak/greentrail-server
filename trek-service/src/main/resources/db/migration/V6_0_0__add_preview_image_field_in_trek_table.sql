@@ -1,0 +1,2 @@
+ALTER TABLE trek
+ADD COLUMN preview_image VARCHAR(255);
