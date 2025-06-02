@@ -1,0 +1,27 @@
+Для запуску необхідно виконати наступні кроки
+
+1. Запустити кластер kind
+kind create cluster --name greentrail-cluster --config ./config/kind-config.yaml
+
+2. Підняти БД для кожного сервісу через Docker Compose (потрібно виконувати з папки кожного модуля)
+	docker-compose up -d
+
+  2.1 в файлі application.yaml media-service треба підставити відповідні ваші секрети для роботи з aws
+  access-key: $ACCESS_KEY
+  secret-key: $SECRET_KEY
+  bucket-name: $BUCKET_NAME
+
+3. Побудувати Docker-image сервісу і завантажити в кластер (є скрипт)
+ ./config/build_and_push.sh $SERVICE_NAME local 
+	(де ви заміть $SERVICE_NAME підкладаєте назву сервісу, наприклад для user-service назва відповідна відповідна)
+ 	цей універсальний скрипт треба застосувати до ВСІХ основних сервісів
+
+4. для сайдкарів той скрипт не працює, тож для кожного необхідно виконати наступні команди
+ 	docker build . -t $SERVICE_NAME:local
+	kind load docker-image $SERVICE_NAME:local --name greentrail-cluster
+
+5. перевірка запуску усіх подів
+	виконайти команду kubectl get pods, в підсумку мають відобразитися всі запущені сервіси в статусі RUN 
+	(1/1 де лиш вони одні, та 2/2 якщо вони мали запускатись разом з сайдкаром)
+5.1 якщо відображаються в стані 0/1, 0/2 або 1/2.... то причину проблеми запуску можна глянути за допомогою команди
+	kubectl logs $POD_NAME -c $SERVICE_NAME (де замість $SERVICE_NAME підкладаєте назуву сайдкару або сервісу, а замість $POD_NAME назва Pod-у отриману в пункті 5)
